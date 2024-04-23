@@ -37,13 +37,16 @@ class userController{
         if (result != null) {
             if (result.password == req.body.password) {
                 // Send a success response with user validation status
+                console.log("Password matched");
                 res.status(200).json({ message: "User validated!", verified: true });
             } else {
                 // Send a unauthorized response if password is incorrect
+                console.log("Incorrect password");
                 res.status(401).json({ message: "Incorrect password", verified: false });
             }
         } else {
             // Send a not found response if user doesn't exist
+            console.log("User not found");
             res.status(404).json({ message: "User not found", verified: false });
         }
     } catch (error) {
