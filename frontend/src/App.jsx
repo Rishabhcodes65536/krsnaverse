@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Music_meditate from './pages/Music_meditate';
 import Events from './pages/Events';
 import Travels from './pages/Travels';
+import Shop from './pages/Shop';
 // import './App.css';
 
 
@@ -17,6 +18,8 @@ export default function App() {
         <Route exact path="/music" element={<Music_meditate/>}/>
         <Route exact path="/events" element={<Events/>}/>
         <Route exact path="/travels" element={<Travels/>}/>
+        <Route exact path="/shop" element={<Shop/>}/>
+
       </Routes>
     </BrowserRouter>
   );

@@ -15,7 +15,7 @@ export default function Navbar() {
   ];
   const services = [
     { label: 'Music and Meditate', link: '/music' },
-    { label: 'Web Design', link: '/' },
+    { label: 'Shop', link: '/shop' },
     { label: 'Machine Learning', link: '/' },
   ];
 
