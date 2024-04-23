@@ -33,13 +33,13 @@ class userController{
     static validateLogin=async(req,res)=>{
         try {
             const result=await userModel.findOne({email:req.body.email})
-            
+            console.log(result);
             if(result!=null){
                 if(result.password==req.body.password){
-                    res.redirect("/user/")
+                    res.status(200).json({message:"User validated!",verified:1})
                 }
                 else{
-                    res.send(`<h1>Incorrect password</h1>`)
+                    res.status(401).json({message:"User not validated!",verified:0})
                 }
             }
             else{
