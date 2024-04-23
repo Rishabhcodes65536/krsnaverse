@@ -1,26 +1,47 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import Input_field from '../components/Input_field';
 import axios from 'axios';
 
 
 export default function Login() {
+    const [formData, setFormData] = useState({
+      email: '',
+      password: ''
+  });
 
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+};
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const requestData = Object.fromEntries(formData.entries());
-    try {
-        console.log(requestData);
-        console.log("login success")
-        const response = await axios.post('http://localhost:9999/login', requestData);
-        console.log('Response:', response.data);
-        // Redirect to home page after successful registration
-        // history.push('/');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
+      e.preventDefault();
+      try {
+          const response = await axios.post('http://localhost:9999/login', formData);
+          const { message, verified } = response.data;
+          setMessage(message);
+          console.log(response.data);
+          console.log(message);
+          console.log(verified);
+          if (verified) {
+              window.location.href = '/'; // Redirect to home page if login is successful
+          }
+      } catch (error) {
+          // Handle error responses
+          if (error.response) {
+              if (error.response.status === 401) {
+                  setMessage('Incorrect password');
+              } else if (error.response.status === 404) {
+                  setMessage('User not found');
+              } else {
+                  setMessage('An error occurred. Please try again later.');
+              }
+          } else {
+              setMessage('An error occurred. Please try again later.');
+          }
+      }
+  };
 
   return (
     <div className="min-h-screen bg-gray-800 py-6 flex flex-col justify-center sm:py-12">
@@ -34,8 +55,8 @@ export default function Login() {
             </p>
           </div>
           <form  onSubmit={handleSubmit}>
-            <Input_field  type = "text" name = "email" />
-            <Input_field type = "password" name="password" />
+            <Input_field  type = "text" name = "email" value={formData.email} onChange={handleChange} />
+            <Input_field type = "password" name="password" value={formData.password} onChange={handleChange} />
 
             {/* <div className="flex justify-between">
               <input
@@ -50,15 +71,15 @@ export default function Login() {
             </div> */}
 
             <div className="text-center lg:text-left">
-            <a href="/">
+            {/* <a href="/"> */}
             <button
-              type="button"
+              type="submit"
               className="inline-block w-full rounded bg-blue-500 px-7 pb-2 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
               data-twe-ripple-init
               data-twe-ripple-color="light">
                Login
             </button>
-            </a>
+            {/* </a> */}
 
             {/* <!-- Register link --> */}
             <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
