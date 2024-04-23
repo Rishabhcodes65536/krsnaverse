@@ -16,7 +16,7 @@ export default function Events() {
     <div>
         <Navbar/>
         <div className='text-4xl mx-[40vw] text-[#5a72a7] flex justify-center my-10 font-bold '>
-            <h2>Events</h2>
+            <h2 className="" >Events</h2>
         </div>
         <Events_card events = {events} />
         <Footer/>
