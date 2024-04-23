@@ -17,7 +17,9 @@ class userController{
             const doc=new userModel({
                 name:req.body.name,
                 email:req.body.email,
-                password:req.body.password
+                password:req.body.password,
+                gender:req.body.gender,
+                age:req.body.age
             })
             const saved=await doc.save();
             console.log(saved)
