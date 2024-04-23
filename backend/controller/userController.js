@@ -2,18 +2,18 @@ import { mongoose } from 'mongoose';
 import userModel from '../models/user.js';
 
 class userController{
-    static home =async (req,res)=>{
-        res.render("index.ejs")
+    static home=async (req,res)=>{
+         res.json({ message: "Welcome to the home page" });
     }
     static register = async (req,res)=>{
-        res.render("register.ejs")
+        res.json({ message: "Render register form here" });
     }
     static login =async (req,res)=>{
-            res.render("login.ejs");
+        res.json({ message: "Render login form here" });
     }
-    static createUserDoc = async (req,res) =>{
+    static createUserDoc = async (req,res)=>{
+            console.log(req.body);
         try {
-            
             const doc=new userModel({
                 name:req.body.name,
                 email:req.body.email,
@@ -22,10 +22,10 @@ class userController{
             const saved=await doc.save();
             console.log(saved)
             console.log("created");
-            res.redirect('/login')
+             res.json({ message: "User created successfully" });
         } catch (error) {
             console.log(error);
-            res.render('/register.ejs', { error: 'An error occurred. Please try again later.' });
+            res.status(500).json({ error: 'An error occurred. Please try again later.'});
         }
     }
     static validateLogin=async(req,res)=>{

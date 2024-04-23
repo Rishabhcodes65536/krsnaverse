@@ -12,7 +12,6 @@ class travelController {
             res.status(500).json({ message: 'Server Error' });
         }
     }
-
     static async getTravelById(req, res) {
         try {
             const travel = await travelModel.findById(req.params.id);
