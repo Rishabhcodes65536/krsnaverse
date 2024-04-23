@@ -6,31 +6,36 @@ import userModel from '../models/user.js';
 
 class adminController{
     static home =async (req,res)=>{
-        res.render("index.ejs")
+         res.json({ message: "Welcome to the home page" });
     }
     static register = async (req,res)=>{
-        res.render("register.ejs")
+        res.render('index.ejs',{
+            "title":"hello"
+        });
     }
     static login =async (req,res)=>{
-            res.render("login.ejs");
+        res.json({ message: "Render login form here" });
     }
     static createUserDoc = async (req,res) =>{
         try {
-            
+             console.log(req.body);
             const doc=new userModel({
                 name:req.body.name,
                 email:req.body.email,
-                password:req.body.password
+                password:req.body.password,
+                gender:req.body.gender,
+                age:req.body.age
             })
             const saved=await doc.save();
             console.log(saved)
             console.log("created");
-            res.redirect('/login')
+             res.json({ message: "User created successfully" });
         } catch (error) {
             console.log(error);
-            res.render('/register.ejs', { error: 'An error occurred. Please try again later.' });
+            res.status(500).json({ error: 'An error occurred. Please try again later.'});
         }
     }
+
     static validateLogin=async(req,res)=>{
         try {
             const result=await userModel.findOne({email:req.body.email})

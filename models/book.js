@@ -7,9 +7,7 @@ const bookSchema=new mongoose.Schema({
     description:{type:String,trim:true},
     name:{type:String,trim:true},
     author:{type:String,trim:true},
-    location:{type:String},
-    startDate:{type:Date,default:Date.now()},
-    endDate:{type:Date,default:Date.now()},
+    location:{type:String}
 })
 
 const bookModel=mongoose.model('book',bookSchema)

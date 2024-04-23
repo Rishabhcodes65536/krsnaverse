@@ -63,6 +63,23 @@ class bookController{
             res.status(500).json({ message: 'Server Error' });
         }
     };
+
+    static createShopBook= async(req, res)=> {
+        try {
+            const { userId, books, price, date } = req.body;
+            const newShopBook = new ShopBook({
+                userId,
+                books,
+                price,
+                date
+            });
+            await newShopBook.save();
+            res.status(201).json(newShopBook);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server Error' });
+        }
+    }
 }
 
 export default bookController;

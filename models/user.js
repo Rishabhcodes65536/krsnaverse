@@ -9,7 +9,7 @@ const userSchema=new mongoose.Schema({
     password:{type:String , trim:true , required:true},
     join:{type: Date,default:Date.now},
     gender:{type:String, required:true},
-    age:{type:Number,validate :(v)=>{$and[v>=5,v<=130]}}
+    age:{type:Number,required:true}
 })
 
 const userModel=mongoose.model('user',userSchema)

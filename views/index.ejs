@@ -5,7 +5,13 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <form method="post">
+      <input type="text" name="name" id="name">
+      <input type="email" name="email" id="email">
+      <input type="password" name="password" id="password">
+      <input type="gender" name="gender" id="gender">
+      <input type="age" name="age" id="age">
+      <button type="submit">Submit kardo</button>
+    </form>
   </body>
 </html>
