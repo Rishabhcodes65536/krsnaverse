@@ -1,7 +1,27 @@
 import React from 'react';
 import Input_field from '../components/Input_field';
+import axios from 'axios';
+
 
 export default function Login() {
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const requestData = Object.fromEntries(formData.entries());
+    try {
+        console.log(requestData);
+        console.log("login success")
+        const response = await axios.post('http://localhost:9999/login', requestData);
+        console.log('Response:', response.data);
+        // Redirect to home page after successful registration
+        // history.push('/');
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
   return (
     <div className="min-h-screen bg-gray-800 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -13,10 +33,9 @@ export default function Login() {
               Fill up the form below to login
             </p>
           </div>
-          <form>
-            <Input_field name = "Name" type = "text" />
-            <Input_field name = "Email" type = "text" />
-            <Input_field type = "password" name="Password" />
+          <form  onSubmit={handleSubmit}>
+            <Input_field  type = "text" name = "email" />
+            <Input_field type = "password" name="password" />
 
             {/* <div className="flex justify-between">
               <input
