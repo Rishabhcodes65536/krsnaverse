@@ -5,6 +5,8 @@ import logger from "morgan"
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
+
+app.use(cors());
 dotenv.config()
 import { join } from "path"
 

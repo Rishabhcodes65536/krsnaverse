@@ -1,5 +1,6 @@
 import  mongoose  from 'mongoose';
 import bookModel from '../models/book.js';
+import shopBookModel from '../models/book-cart.js';
 
 class bookController{
  static getAllBooks = async (req, res) => {
@@ -67,7 +68,7 @@ class bookController{
     static createShopBook= async(req, res)=> {
         try {
             const { userId, books, price, date } = req.body;
-            const newShopBook = new ShopBook({
+            const newShopBook = new shopBookModel({
                 userId,
                 books,
                 price,
