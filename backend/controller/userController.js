@@ -30,25 +30,28 @@ class userController{
             res.status(500).json({ error: 'An error occurred. Please try again later.'});
         }
     }
-    static validateLogin=async(req,res)=>{
-        try {
-            const result=await userModel.findOne({email:req.body.email})
-            console.log(result);
-            if(result!=null){
-                if(result.password==req.body.password){
-                    res.status(200).json({message:"User validated!",verified:1})
-                }
-                else{
-                    res.status(401).json({message:"User not validated!",verified:0})
-                }
+    static validateLogin = async (req, res) => {
+    try {
+        const result = await userModel.findOne({ email: req.body.email });
+        console.log(result);
+        if (result != null) {
+            if (result.password == req.body.password) {
+                // Send a success response with user validation status
+                res.status(200).json({ message: "User validated!", verified: true });
+            } else {
+                // Send a unauthorized response if password is incorrect
+                res.status(401).json({ message: "Incorrect password", verified: false });
             }
-            else{
-                res.send(`<h1>User not yet resistered</h1>`)
-            }
-            res.redirect('/login')
-        } catch (error) {
-            console.log(error)
+        } else {
+            // Send a not found response if user doesn't exist
+            res.status(404).json({ message: "User not found", verified: false });
         }
+    } catch (error) {
+        console.log(error);
+        // Send a server error response if an error occurs
+        res.status(500).json({ message: "An error occurred. Please try again later.", verified: false });
     }
+};
+
 };
 export default userController;
