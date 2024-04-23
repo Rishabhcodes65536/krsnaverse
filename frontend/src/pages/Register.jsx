@@ -1,10 +1,24 @@
-import React from 'react';
+import React , {useState} from 'react';
 import axios from 'axios';
 import Input_field from '../components/Input_field';
 // import { useHistory } from 'react-router-dom'; // Import useHistory hook
 
 export default function Register() {
     // const history = useHistory(); // Initialize useHistory hook
+
+    const [formData, setFormData] = useState({
+        name:'',
+        email: '',
+        password: '',
+        gender:'',
+        age:''
+    });
+  
+    const [message, setMessage] = useState('');
+  
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,6 +28,7 @@ export default function Register() {
             console.log(requestData);
             const response = await axios.post('http://localhost:9999/register', requestData);
             console.log('Response:', response.data);
+            window.location.href = '/login';
             // Redirect to home page after successful registration
             // history.push('/');
         } catch (error) {
@@ -33,11 +48,11 @@ export default function Register() {
                         </p>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <Input_field name="name" type="text" />
-                        <Input_field name="email" type="text" />
-                        <Input_field type="password" name="password" /> {/* Corrected name attribute */}
-                        <Input_field type="text" name="gender" />
-                        <Input_field type="number" name="age" />
+                        <Input_field name="name" type="text" value={formData.name} onChange={handleChange}/>
+                        <Input_field name="email" type="text" value={formData.email} onChange={handleChange} />
+                        <Input_field type="password" name="password" value={formData.password} onChange={handleChange} /> {/* Corrected name attribute */}
+                        <Input_field type="text" name="gender" value={formData.gender} onChange={handleChange} />
+                        <Input_field type="number" name="age" value={formData.age} onChange={handleChange} />
 
                         <div className="text-center lg:text-left">
                             <button
