@@ -86,23 +86,24 @@ import Footer from '../components/Footer';
 import ServicesSlider from '../components/ServicesSlider';
 
 export default function Events_detailed() {
-    const url = new URL(window.location.href); // Create a URL object from the current URL
-    const pathname = url.pathname; // Get the pathname from the URL
+    // const url = new URL(window.location.href); // Create a URL object from the current URL
+    // const pathname = url.pathname; // Get the pathname from the URL
 
-    // Normalize the pathname by removing any trailing slashes
-    const normalizedPathname = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+    // // Normalize the pathname by removing any trailing slashes
+    // const normalizedPathname = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
     
-    // Split the normalized pathname by '/' to extract the last part, which should be the ID
-    const parts = normalizedPathname.split('/');
-    const _id = parts[parts.length - 1]; 
-    console.log("ID:",_id);
+    // // Split the normalized pathname by '/' to extract the last part, which should be the ID
+    // const parts = normalizedPathname.split('/');
+    // const _id = parts[parts.length - 1]; 
+    const { id } = useParams();
+    console.log("ID:",id);
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const response = await axios.get(`http://localhost:9999/event/${_id}`);
+                const response = await axios.get(`http://localhost:9999/event/${id}`);
                 setEvent(response.data);
                 setLoading(false);
             } catch (error) {
@@ -112,7 +113,7 @@ export default function Events_detailed() {
         };
 
         fetchEvent();
-    }, [_id]);
+    }, [id]);
 
     return (
         <>

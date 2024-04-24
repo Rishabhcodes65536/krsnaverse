@@ -20,7 +20,7 @@ export default function App() {
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/music" element={<Music_meditate/>}/>
         <Route exact path="/events" element={<Events/>}/>
-        <Route exact path="/events_detailed/:index" element={<Events_detailed />}/>
+        <Route exact path="/events_detailed/:id" element={<Events_detailed />}/>
         <Route exact path="/travels" element={<Travels/>}/>
         <Route exact path="/shop" element={<Shop/>}/>
 
