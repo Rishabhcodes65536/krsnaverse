@@ -1,7 +1,7 @@
 import createHttpError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
-import logger from "morgan"
+// import logger from "morgan"
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
@@ -34,7 +34,7 @@ import adminRoutes from './routes/adminRoutes.js'
 
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -42,7 +42,7 @@ app.use(express.static('./public'));
 
 app.use('/', web);
 app.use('/travel', travelRouter);
-app.use('/books', bookRouter);
+app.use('/book', bookRouter);
 // app.use('/shop', shopRouter);             
 // app.use('/event', eventRouter);
 app.use('/music',musicRouter);

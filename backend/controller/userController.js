@@ -24,7 +24,7 @@ class userController{
             const saved=await doc.save();
             console.log(saved)
             console.log("created");
-             res.json({ message: "User created successfully" });
+             res.status(201).json({ message: "User created successfully" });
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: 'An error occurred. Please try again later.'});
