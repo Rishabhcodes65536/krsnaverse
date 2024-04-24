@@ -1,12 +1,14 @@
 // backend/controllers/musicController.js
 
 import musicModel from "../models/music.js";
-import userModel from './../models/user.js';
+
 
 class musicController {
-    static async getAllMusic(req, res) {
+    static getAllMusic=async (req,res) => {
         try {
+            console.log("hii");
             const music = await musicModel.find();
+            console.log(music);
             res.json(music);
         } catch (error) {
             console.error(error);
@@ -14,7 +16,7 @@ class musicController {
         }
     }
 
-    static async getMusicById(req, res) {
+    static getMusicById= async (req, res)=> {
         try {
             const music = await musicModel.findById(req.params.id);
             if (!music) {
