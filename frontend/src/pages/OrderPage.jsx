@@ -45,9 +45,22 @@ const OrderPage = () => {
             });
     }, []);
 
-    const handleSubmit = () => {
-        // Implement your submit logic here
-        console.log('Submitting order:', cartItems);
+    const handleSubmit = async () => {
+        try {
+            console.log("Hiii")
+            const response = await axios.post('http://localhost:9999/book', { cartItems });
+            const { success } = response.data;
+            console.log(success)
+            if (success) {
+                // Redirect to home page if order placed successfully
+                window.location.href = '/';
+            } else {
+                // Redirect to login page if order placement failed
+                window.location.href = '/login';
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
     };
 
     if (loading) {
