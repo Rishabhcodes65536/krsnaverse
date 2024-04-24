@@ -7,6 +7,33 @@ import Donate_us from '../components/Donate_us'
 import ServicesSlider from '../components/ServicesSlider'
 // import Dropdown from '../components/Dropdown'
 
+const service_data = [
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+  {
+      desc: `Visitor Facility`,
+      image: `/images/c1.jpeg`
+  },
+];
+
 export default function Home() {
   return (
     <div>
@@ -36,7 +63,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <ServicesSlider/>
+      <ServicesSlider service_data={service_data}/>
       
       <div className='mt-10 mx-20 flex justify-between'> 
         <div>
@@ -53,3 +80,6 @@ export default function Home() {
     </div>
   )
 }
+
+
+

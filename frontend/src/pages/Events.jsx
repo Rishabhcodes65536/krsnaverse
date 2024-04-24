@@ -4,12 +4,12 @@ import Footer from '../components/Footer'
 import Events_card from '../components/Events_card'
 
 const events = [
-    {image: '/images/c1.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur" },
-    {image: '/images/c2.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  },
-    {image: '/images/c3.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  },
-    {image: '/images/c4.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  },
-    {image: '/images/c5.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  },
-  ]
+  {id: 1, image: '/images/c1.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur" , date: "21/04/2024", time: "05:00"  },
+  {id: 2, image: '/images/c2.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur" , date: "21/04/2024", time: "05:00"   },
+  {id: 3, image: '/images/c3.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  , date: "21/04/2024", time: "05:00"  },
+  {id: 4, image: '/images/c4.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  , date: "21/04/2024", time: "05:00"  },
+  {id: 5, image: '/images/c5.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Lorem ipsum dolor sit amet consectetur"  , date: "21/04/2024", time: "05:00"  },
+]
 
 export default function Events() {
   return (
