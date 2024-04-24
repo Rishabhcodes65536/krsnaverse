@@ -7,15 +7,10 @@ import { Link } from 'react-router-dom';
 
 export default function Shopping() {
     const [books, setBooks] = useState([]);
-    const [cartItems, setCartItems] = useState({});
-
-    // Load cart items from local storage on component mount
-    useEffect(() => {
+    const [cartItems, setCartItems] = useState(() => {
         const storedCartItems = localStorage.getItem('cartItems');
-        if (storedCartItems) {
-            setCartItems(JSON.parse(storedCartItems));
-        }
-    }, []);
+        return storedCartItems ? JSON.parse(storedCartItems) : {};
+    });
 
     // Fetch books from backend API on component mount
     useEffect(() => {
@@ -81,7 +76,11 @@ export default function Shopping() {
                 <CartDisplay cartItems={cartItems} books={books} totalAmount={totalAmount} onRemoveFromCart={removeFromCart} />
 
                 {/* Proceed to Checkout Button */}
-                
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                    <Link to="/order" style={{ backgroundColor: '#007bff', color: '#fff', fontWeight: 'bold', padding: '0.5rem 1rem', borderRadius: '0.25rem', textDecoration: 'none', textAlign: 'center' }}>
+                        Proceed to Checkout
+                    </Link>
+                </div>
             </div>
             <Footer />
         </>

@@ -1,93 +1,116 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import CartDisplay from '../components/CartDisplay';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export default function Shopping() {
-    const [books, setBooks] = useState([]);
+const OrderPage = () => {
     const [cartItems, setCartItems] = useState({});
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [products, setProducts] = useState([]);
 
-    // Load cart items from local storage on component mount
     useEffect(() => {
+        // Fetch cartItems from localStorage
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
             setCartItems(JSON.parse(storedCartItems));
         }
     }, []);
 
-    // Fetch books from backend API on component mount
     useEffect(() => {
+        // Calculate total amount whenever cartItems change
+        let amount = 0;
+        for (const [id, quantity] of Object.entries(cartItems)) {
+            const product = products.find((product) => product._id === id);
+            if (product) {
+                amount += product.price * quantity;
+            }
+        }
+        setTotalAmount(amount);
+    }, [cartItems, products]);
+
+    useEffect(() => {
+        // Fetch products from the API
         axios.get('http://localhost:9999/book')
             .then(response => {
-                setBooks(response.data);
+                setProducts(response.data);
+                setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching books:', error);
+                console.error('Error fetching products:', error);
+                setError('Error fetching products. Please try again later.');
+                setLoading(false);
             });
     }, []);
 
-    // Update local storage when cart items change
-    useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems]);
-
-    const addToCart = (id) => {
-        setCartItems((prevCartItems) => ({
-            ...prevCartItems,
-            [id]: (prevCartItems[id] || 0) + 1,
-        }));
+    const handleSubmit = () => {
+        // Implement your submit logic here
+        console.log('Submitting order:', cartItems);
     };
 
-    const removeFromCart = (id) => {
-        const updatedCartItems = { ...cartItems };
-        delete updatedCartItems[id];
-        setCartItems(updatedCartItems);
-    };
+    if (loading) {
+        return (
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <div className="container mx-auto px-4 py-8 flex-grow">
+                    <h1 className="text-3xl font-semibold text-center">Loading...</h1>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
 
-    const totalAmount = () => {
-        let amount = 0;
-        for (const [id, quantity] of Object.entries(cartItems)) {
-            const book = books.find((book) => book._id === id);
-            if (book) {
-                amount += quantity * book.price;
-            }
-        }
-        return amount;
-    };
+    if (error) {
+        return (
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <div className="container mx-auto px-4 py-8 flex-grow">
+                    <h1 className="text-3xl font-semibold text-center">{error}</h1>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
 
     return (
-        <>
-            <Navbar cartItemsCount={Object.keys(cartItems).length} />
-            <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-3 gap-4">
-                    {/* Product cards */}
-                    {books.map((book) => (
-                        <div key={book._id} style={{ border: '1px solid #000', padding: '1rem', marginBottom: '1rem' }}>
-                            <img src={book.image} alt="" style={{ width: '100%', marginBottom: '0.5rem' }} />
-                            <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>{book.name}</h2>
-                            <p style={{ color: '#666', marginBottom: '0.5rem' }}>Author: {book.author}</p>
-                            <p style={{ color: '#666', marginBottom: '0.5rem' }}>Price: {book.price} Rs</p>
-                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                <button style={{ backgroundColor: '#007bff', color: '#fff', fontWeight: 'bold', padding: '0.5rem', borderRadius: '0.25rem' }} onClick={() => addToCart(book._id)}>+</button>
-                                <input type="text" value={cartItems[book._id] || ''} readOnly style={{ margin: '0 0.5rem', width: '3rem', textAlign: 'center', border: '1px solid #ccc', borderRadius: '0.25rem' }} />
-                                <button style={{ backgroundColor: '#007bff', color: '#fff', fontWeight: 'bold', padding: '0.5rem', borderRadius: '0.25rem' }} onClick={() => removeFromCart(book._id)}>-</button>
+        <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <div className="container mx-auto px-4 py-8 flex-grow">
+                <h1 className="text-3xl font-semibold text-center mb-8">Your Order</h1>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {Object.keys(cartItems).map((id) => {
+                        const item = products.find((product) => product._id === id);
+                        if (!item) return null;
+                        return (
+                            <div key={id} className="border p-4 flex flex-col items-center">
+                                <img src={item.image} alt={item.name} className="w-24 h-24 mb-2" />
+                                <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                                <p className="text-gray-600">Price: {item.price} Rs</p>
+                                <p className="text-gray-600">Quantity: {cartItems[id]}</p>
+                                {/* Display other product details as needed */}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
-                {/* Cart Display */}
-                <CartDisplay cartItems={cartItems} books={books} totalAmount={totalAmount} onRemoveFromCart={removeFromCart} />
-
-                {/* Proceed to Checkout Button */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                    <Link to="/order" style={{ backgroundColor: '#007bff', color: '#fff', fontWeight: 'bold', padding: '0.5rem 1rem', borderRadius: '0.25rem', textDecoration: 'none', textAlign: 'center' }}>
-                        Proceed to Checkout
+                <div className="mt-8 flex justify-center">
+                    <div className="text-xl font-semibold">Total Amount: {totalAmount} Rs</div>
+                </div>
+                <div className="mt-8 flex justify-center">
+                    <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 mr-4" onClick={handleSubmit}>
+                        Submit Order
+                    </button>
+                    <Link to="/shop">
+                        <button className="bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-700">
+                            Edit Cart
+                        </button>
                     </Link>
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
-}
+};
+
+export default OrderPage;
