@@ -1,4 +1,6 @@
 import React ,{useState} from 'react'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
 
 
@@ -30,23 +32,23 @@ export default function Cart({products}) {
     }
 
   return (
-    
+    <>
+    <Navbar/>
     <div className='flex flex-wrap justify-center items-center gap-20 p-10'>
-        <div className='fixed p-4 top-0 bg-blue-200 h-screen w-full overflow-y-scroll border border-red-900'>
+        <div className='fixed flex flex-col justify-center p-4 top-0 bg-blue-200 h-screen w-full overflow-y-scroll border border-red-900'>
     {products.map((product, index) => (
-            <div>
-            <img w-40 h-40  src={product.product_image} alt="" />
+            <div className=' flex flex-col justify-center '>
+            <img className='w-[25vw] h-[30vh] '   src={product.product_image} alt="" />
             <p>{product.product_name}</p>
             <p>{product.price}Rs.</p>
             <button className='border-2 drop-shadow-2xl p-2 rounded hover:bg-green-300' onClick={()=> addToCart(product.id)}>Add To Cart</button>
-        </div>
+            </div>
         ))}
         </div>
         
 
         <div className='fixed p-4 right-0 top-0 bg-blue-100 h-screen w-80 overflow-y-scroll'>
-            <h1 className='text-white font-bold text-2xl'>Your cart</h1>
-            <p className='text-3xl font-bold '>Total: {totalAmount()} Rs</p>
+            <h1 className='font-bold text-2xl'>Cart</h1>
             {products.map((product, index) => (
                 cartItems[product.id] > 0 ? (
                     <>
@@ -67,12 +69,20 @@ export default function Cart({products}) {
                         <p>-</p>
                         <p>{product.price} Rs</p>
                     </div>
+
                     </>
                 ) : null
             ))}
+            <p className='text-3xl font-bold mt-[5vh]'>Total: {totalAmount()} Rs</p>
+
+            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-[5vh]">
+            Pay Now
+            </button>
         </div>
     </div>
+    <Footer/>
 
+    </>
     
   )
 };
