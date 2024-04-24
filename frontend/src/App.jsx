@@ -9,7 +9,7 @@ import Shop from './pages/Shop';
 import Register from './pages/Register';
 import Events_detailed from './pages/Events_detailed';
 // import './App.css';
-
+import OrderPage from './pages/OrderPage';
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
         <Route exact path="/events_detailed/:id" element={<Events_detailed />}/>
         <Route exact path="/travels" element={<Travels/>}/>
         <Route exact path="/shop" element={<Shop/>}/>
-
+        <Route exact path="/order" element={<OrderPage />} />
       </Routes>
     </BrowserRouter>
   );
