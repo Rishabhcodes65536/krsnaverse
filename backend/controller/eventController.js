@@ -1,9 +1,9 @@
 // backend/controllers/eventController.js
 
-import eventModel from "../models/event";
+import eventModel from "../models/event.js";
 
 class EventController {
-    async getAllEvents(req, res) {
+    static getAllEvents= async (req, res)=>{
         try {
             const events = await eventModel.find();
             res.json(events);
@@ -13,9 +13,13 @@ class EventController {
         }
     }
 
-    async getEventById(req, res) {
+    static getEventById= async (req, res)=>{
         try {
+            console.log(req.params.id);
             const event = await eventModel.findById(req.params.id);
+            if (!event) {
+            return res.status(400).json({ message: 'Event ID is required' });
+            }
             if (!event) {
                 return res.status(404).json({ message: 'Event not found' });
             }
@@ -26,7 +30,7 @@ class EventController {
         }
     }
 
-    async createEvent(req, res) {
+    static createEvent= async (req, res)=>{
         try {
             const newEvent = new eventModel(req.body);
             await newEvent.save();
@@ -37,7 +41,7 @@ class EventController {
         }
     }
 
-    async updateEvent(req, res) {
+    static updateEvent= async (req, res)=> {
         try {
             const { id } = req.params;
             const updatedEvent = await eventModel.findByIdAndUpdate(id, req.body, { new: true });
@@ -51,7 +55,7 @@ class EventController {
         }
     }
 
-    async deleteEvent(req, res) {
+    static deleteEvent= async (req, res)=> {
         try {
             const { id } = req.params;
             const deletedEvent = await eventModel.findByIdAndDelete(id);
@@ -65,7 +69,7 @@ class EventController {
         }
     }
 
-    async getPastEvents(req, res) {
+    static getPastEvents= async (req, res)=> {
         try {
             const pastEvents = await eventModel.find({ date: { $lt: new Date() } });
             res.json(pastEvents);
@@ -75,7 +79,7 @@ class EventController {
         }
     }
 
-    async getUpcomingEvents(req, res) {
+    static getUpcomingEvents= async (req, res)=>{
         try {
             const upcomingEvents = await eventModel.find({ date: { $gte: new Date() } });
             res.json(upcomingEvents);
@@ -86,4 +90,4 @@ class EventController {
     }
 }
 
-module.exports = new EventController();
+export default EventController;

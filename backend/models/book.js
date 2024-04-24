@@ -7,7 +7,7 @@ const bookSchema=new mongoose.Schema({
     description:{type:String,trim:true},
     name:{type:String,trim:true},
     author:{type:String,trim:true},
-    location:{type:String}
+    image:{type:String},
 })
 
 const bookModel=mongoose.model('book',bookSchema)

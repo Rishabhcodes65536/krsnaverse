@@ -1,11 +1,59 @@
+// import React from 'react';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+
+
+
+// export default function ServicesSlider( {service_data}) {
+//     var settings = {
+//         dots: true,
+//         infinite: true,
+//         speed: 500,
+//         slidesToShow: 3.5,
+//         slidesToScroll: 1,
+//         autoplay: true,
+//         draggable: true,
+//         // focusOnSelect: true,
+//         // pauseOnFocus: true,
+//         swipeToSlide: true,
+//     };
+//     return (
+//         <div>
+//             <div className="w-10/12 m-auto mb-20">
+//                 <div className="mt-10 ">
+//                     <Slider {...settings}>
+//                         {service_data.map((d) => (
+//                             <div
+//                                 class="block max-w-[18rem] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+//                                 <div class=" border rounded-full overflow-hidden bg-cover bg-no-repeat">
+//                                     <img
+//                                         class="rounded-t-xl w-full h-[25vh]"
+//                                         src={d.image}
+//                                         alt=""
+//                                     />
+//                                 </div>
+//                                 <div class="p-6 flex justify-center">
+//                                     <p class=" text-[#7e8daa] text-md font-bold">
+//                                         {d.desc}
+//                                     </p>
+//                                 </div>
+//                             </div>
+//                         ))}
+//                     </Slider>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+
 import React from 'react';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-
-
-export default function ServicesSlider( {service_data}) {
+export default function ServicesSlider({ service_data }) {
     var settings = {
         dots: true,
         infinite: true,
@@ -14,35 +62,37 @@ export default function ServicesSlider( {service_data}) {
         slidesToScroll: 1,
         autoplay: true,
         draggable: true,
-        // focusOnSelect: true,
-        // pauseOnFocus: true,
         swipeToSlide: true,
     };
+
     return (
-        <div>
-            <div className="w-10/12 m-auto mb-20">
-                <div className="mt-10 ">
-                    <Slider {...settings}>
-                        {service_data.map((d) => (
+        <div className="w-10/12 m-auto mb-20">
+            <div className="mt-10 ">
+                <Slider {...settings}>
+                    {service_data &&
+                        service_data.map((d) => (
                             <div
-                                class="block max-w-[18rem] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                                <div class=" border rounded-full overflow-hidden bg-cover bg-no-repeat">
-                                    <img
-                                        class="rounded-t-xl w-full h-[25vh]"
-                                        src={d.image}
-                                        alt=""
-                                    />
+                                key={d._id}
+                                className="block max-w-[18rem] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
+                            >
+                                <div className="border rounded-full overflow-hidden bg-cover bg-no-repeat">
+                                    {d.image && (
+                                        <img
+                                            className="rounded-t-xl w-full h-[25vh]"
+                                            src={d.image}
+                                            alt=""
+                                        />
+                                    )}
                                 </div>
-                                <div class="p-6 flex justify-center">
-                                    <p class=" text-[#7e8daa] text-md font-bold">
+                                <div className="p-6 flex justify-center">
+                                    <p className="text-[#7e8daa] text-md font-bold">
                                         {d.desc}
                                     </p>
                                 </div>
                             </div>
                         ))}
-                    </Slider>
-                </div>
+                </Slider>
             </div>
         </div>
     );
-};
+}

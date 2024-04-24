@@ -29,7 +29,7 @@
 import React from 'react';
 
 import { ReactComponent as LocationIcon } from '../icons/location-icon.svg';
-import { ReactComponent as CalendarIcon } from '../icons/calendar-icon.svg';
+import { ReactComponent as CalendarIcon } from '../icons/calender-icon.svg';
 import { ReactComponent as RupeeIcon } from '../icons/rupee-icon.svg';
 
 

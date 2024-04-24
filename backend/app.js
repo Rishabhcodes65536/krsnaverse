@@ -28,6 +28,7 @@ import travelRouter from './routes/travelRoute.js'
 import bookRouter from './routes/bookRoutes.js'
 import musicRouter from './routes/musicRouter.js'
 import adminRoutes from './routes/adminRoutes.js'
+import eventRouter from './routes/eventRoutes.js'
 
 
 // view engine setup
@@ -44,7 +45,7 @@ app.use('/', web);
 app.use('/travel', travelRouter);
 app.use('/book', bookRouter);
 // app.use('/shop', shopRouter);             
-// app.use('/event', eventRouter);
+app.use('/event', eventRouter);
 app.use('/music',musicRouter);
 app.use('/admin',adminRoutes);
 // catch 404 and forward to error handler
@@ -63,6 +64,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
+  console.log(`Server running on port: ${port} and URI ${DATABASE_URI}`);
 });
 
