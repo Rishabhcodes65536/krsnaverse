@@ -38,6 +38,7 @@ class userController{
             if (result.password == req.body.password) {
                 // Send a success response with user validation status
                 console.log("Password matched");
+                req.session.user = result;
                 res.status(200).json({ message: "User validated!", verified: true });
             } else {
                 // Send a unauthorized response if password is incorrect

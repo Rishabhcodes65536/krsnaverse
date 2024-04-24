@@ -5,5 +5,5 @@ import bookController from './../controller/bookController.js';
 
 router.get('/', bookController.getAllBooks);
 router.get('/:id', bookController.getBookById);
-router.post('/', bookController.createShopBook);
+router.post('/', bookController.placeOrder);
 export default router;

@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
+import session from "express-session";
+import bodyParser from "body-parser";
 
 dotenv.config()
 import { join } from "path"
@@ -40,6 +42,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('./public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 3600000, // 1 hour in milliseconds
+    }
+}));
 
 app.use('/', web);
 app.use('/travel', travelRouter);
