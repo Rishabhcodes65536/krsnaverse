@@ -71,7 +71,6 @@
 
 
 //dynamically addition of music
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
@@ -79,45 +78,45 @@ import Music_carousel from '../components/Music_carousel';
 import Footer from '../components/Footer';
 import Music_card from '../components/Music_card';
 
-export default function Music_meditate() {
-    const [musics, setMusics] = useState([]);
+export default function MusicApp() {
+  const [musics, setMusics] = useState([]);
 
-    useEffect(() => {
-        const fetchMusicData = async () => {
-            try {
-                const response = await axios.get('http://localhost:9999/music'); // Update URL with your backend URL
-                console.log(response);
-                setMusics(response.data);
-                musics(response.data);
-            } catch (error) {
-                console.error('Error fetching music data:', error);
-            }
-        };
+  useEffect(() => {
+    const fetchMusicData = async () => {
+      try {
+        const response = await axios.get('http://localhost:9999/music');
+        console.log(response.data);
+        setMusics(response.data);
+      } catch (error) {
+        console.error('Error fetching music data:', error);
+      }
+    };
 
-        fetchMusicData();
-    }, []);
+    fetchMusicData();
+  }, []);
 
-    return (
-        <>
-            <Navbar />
-            <div className='my-10 mx-20 flex flex-col'>
-                <div className='flex justify-center'>
-                    <h2 className="mb-2 mt-0 text-3xl text-[#5a72a7] font-medium leading-tight text-primary">Meditate to Music</h2>
-                </div>
-            </div>
-            <Music_carousel images={musics.map(music => music.link)} />
-            <div className='mt-20 mx-20 flex flex-col mb-9'>
-                <div className='flex justify-center'>
-                    <h2 className="mb-2 mt-0 text-3xl text-[#5a72a7] font-medium leading-tight text-primary">Meditate to Music</h2>
-                </div>
-                <div className='flex justify-end'>
-                    <button>
-                        <a href="/">View All</a>
-                    </button>
-                </div>
-            </div>
-            <Music_card musics={musics} />
-            <Footer />
-        </>
-    );
-};
+  return (
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-center mb-8">Music Player</h1>
+        <Music_carousel images={musics.map(music => music.link)} />
+        <div className='mt-20 mx-20 flex flex-col mb-9  '> 
+        <div className='flex justify-center'>
+            <h2 className="mb-2 mt-0 text-3xl text-[#5a72a7] font-medium leading-tight text-primary">Meditate to Music</h2>
+        </div>
+        <div className='flex justify-end'>
+         <button>
+           <a href="/">View All</a>
+         </button>
+         </div>
+     </div>
+          {musics.map((music, index) => (
+            <Music_card key={index} music={music} />
+          ))}
+      </div>
+      <Footer />
+    </>
+  );
+}
+ 
