@@ -5,7 +5,8 @@ const eventSchema=new mongoose.Schema({
     fees:{type:Integer, validate : (v)=>{$and(v>=0,v<=10000)}},
     date:{type:Date,deafult:Date.now()},
     description:{type:String,trim:true},
-    location:{type:String}
+    location:{type:String},
+    image:{type:String}
 })
 
 const eventModel=mongoose.model('event',eventSchema)

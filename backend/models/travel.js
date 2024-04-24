@@ -8,6 +8,7 @@ const travelSchema=new mongoose.Schema({
     location:{type:String},
     startDate:{type:Date,default:Date.now()},
     endDate:{type:Date,default:Date.now()},
+    image:{type:String}
 })
 
 const travelModel=mongoose.model('travel',travelSchema)

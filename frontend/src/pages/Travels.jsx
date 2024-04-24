@@ -1,28 +1,64 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Travel_card from '../components/Travel_card'
+// import React from 'react'
+// import Navbar from '../components/Navbar'
+// import Footer from '../components/Footer'
+// import Travel_card from '../components/Travel_card'
 
 
-const travels = [
-  {image: '/images/c1.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 1" },
-  {image: '/images/c2.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 2"  },
-  {image: '/images/c3.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 3"  },
-  {image: '/images/c4.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 4"  },
-  {image: '/images/c5.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 5"  },
-]
+// const travels = [
+//   {image: '/images/c1.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 1" },
+//   {image: '/images/c2.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 2"  },
+//   {image: '/images/c3.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 3"  },
+//   {image: '/images/c4.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 4"  },
+//   {image: '/images/c5.jpeg', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione obcaecati assumenda accusamus dicta expedita officiis, quam harum aut magni nam?", title: "Tour 5"  },
+// ]
 
-export default function Travels() { 
+// export default function Travels() { 
+//   return (
+//     <div>
+//     <Navbar/>
+//         <div className='text-4xl mx-[40vw] text-[#5a72a7] flex justify-center my-10 font-bold '>
+//             <h2>Travels</h2>
+//         </div>
+//         <div>
+//           <Travel_card travels = {travels}/>
+//         </div>
+//     <Footer/>
+//     </div>
+//   )
+// }
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Travel_card from '../components/Travel_card';
+
+export default function Travels() {
+  const [travels, setTravels] = useState([]);
+
+  useEffect(() => {
+    const fetchTravels = async () => {
+      try {
+        const response = await axios.get('http://localhost:9999/travel');
+        setTravels(response.data);
+      } catch (error) {
+        console.error('Error fetching travel data:', error);
+      }
+    };
+
+    fetchTravels();
+  }, []);
+
   return (
     <div>
-    <Navbar/>
-        <div className='text-4xl mx-[40vw] text-[#5a72a7] flex justify-center my-10 font-bold '>
-            <h2>Travels</h2>
-        </div>
-        <div>
-          <Travel_card travels = {travels}/>
-        </div>
-    <Footer/>
+      <Navbar />
+      <div className='text-4xl mx-[40vw] text-[#5a72a7] flex justify-center my-10 font-bold '>
+        <h2>Travels</h2>
+      </div>
+      <div>
+        <Travel_card travels={travels} />
+      </div>
+      <Footer />
     </div>
-  )
+  );
 }
