@@ -1,6 +1,6 @@
 // backend/controllers/adminController.js
 
-import userModel from '../models/user.js';
+import {userModel} from '../models/user.js';
 
 class adminController {
     static home = async (req, res) => {

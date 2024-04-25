@@ -1,6 +1,11 @@
 // backend/models/shopBookModel.js
 
 import mongoose from "mongoose";
+import { bookSchema } from "./book.js";
+import { userSchema } from "./user.js";
+
+const Book = mongoose.model('Book', bookSchema);
+const User = mongoose.model('User', userSchema);
 
 const shopBookSchema = new mongoose.Schema({
     userId: {

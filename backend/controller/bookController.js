@@ -1,5 +1,5 @@
 import  mongoose  from 'mongoose';
-import bookModel from '../models/book.js';
+import {bookModel} from '../models/book.js';
 import shopBookModel from '../models/book-cart.js';
 
 class bookController{
@@ -101,7 +101,24 @@ static placeOrder = async (req, res) => {
         res.status(500).json({ message: "An error occurred. Please try again later.", success: false });
     }
 };
-
+static getBookOrder = async (req,res)=>{
+    try {
+        const userId=req.userId;
+        if(!userId){
+             return res.status(401).json({ message: "Unauthorized", success: false });
+        }
+        console.log(userId);
+        const Orders=await shopBookModel.find({userId}).populate('books');
+        console.log(Orders[0].books);
+        console.log(Orders);
+        if(!Orders){
+            return res.status(204).json({message:"No orders to display",success:true});
+        }
+        res.status(200).json({Orders});
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 }
 
