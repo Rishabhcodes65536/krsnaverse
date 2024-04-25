@@ -1,7 +1,7 @@
 import { mongoose } from 'mongoose';
 import userModel from '../models/user.js';
 import bcrypt from "bcrypt"
-import jwt from "jwt"
+import jwt from "jsonwebtoken"
 
 class userController{
     static home=async (req,res)=>{
@@ -43,7 +43,8 @@ class userController{
                 // Send a success response with user validation status
                 console.log("Password matched");
                 req.session.user = result;
-                const token = jwt.sign({ userId: resul._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                const token = jwt.sign({ userId: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                console.log(token);
                 res.status(200).json({ message: "User validated!", verified: true,token});
             } else {
                 // Send a unauthorized response if password is incorrect

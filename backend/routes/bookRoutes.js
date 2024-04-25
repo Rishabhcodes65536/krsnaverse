@@ -6,5 +6,5 @@ import verifyToken from '../middleware/validation.js';
 
 router.get('/', bookController.getAllBooks);
 router.get('/:id', bookController.getBookById);
-router.post('/',validateToken, bookController.placeOrder);
+router.post('/',verifyToken, bookController.placeOrder);
 export default router;
