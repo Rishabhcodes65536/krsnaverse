@@ -46,22 +46,37 @@ const OrderPage = () => {
     }, []);
 
     const handleSubmit = async () => {
-        try {
-            console.log("Hiii")
-            const response = await axios.post('http://localhost:9999/book', { cartItems });
-            const { success } = response.data;
-            console.log(success)
-            if (success) {
-                // Redirect to home page if order placed successfully
-                window.location.href = '/';
-            } else {
-                // Redirect to login page if order placement failed
-                window.location.href = '/login';
-            }
-        } catch (error) {
-            console.error('Error placing order:', error);
+    try {
+        console.log("Hiii");
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("no token");
+            // Redirect to login page if token is not present
+            window.location.href = '/login';
+            return;
         }
-    };
+        
+        const response = await axios.post('http://localhost:9999/book', { cartItems }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const { success } = response.data;
+        console.log(success);
+        if (success) {
+            // Redirect to home page if order placed successfully
+            console.log("success");
+            window.location.href = '/';
+        } else {
+            // Redirect to login page if order placement failed
+            console.log("Wrong token");
+            window.location.href = '/login';
+        }
+    } catch (error) {
+        console.error('Error placing order:', error);
+    }
+};
 
     if (loading) {
         return (
