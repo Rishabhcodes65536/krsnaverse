@@ -116,6 +116,7 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:9999/login', formData);
             const { message, verified } = response.data;
+            localStorage.setItem('token', response.data.token);
             setMessage(message);
             console.log(response.data);
             console.log(message);

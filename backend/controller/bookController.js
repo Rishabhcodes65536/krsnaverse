@@ -66,17 +66,15 @@ class bookController{
         }
     };
 
-    static placeOrder = async (req, res) => {
+static placeOrder = async (req, res) => {
     try {
         // Check if user is logged in
-        console.log(req.session.user);
-        if (!req.session.user) {
-            return res.json({ message: "User not logged in", success: false });
+        const userId = req.userId // Access userId from middleware
+        console.log(userId);
+        if (!userId) {
+            return res.status(401).json({ message: "Unauthorized", success: false });
         }
-        
-        const userId = req.session.user._id;
         const { cartItems } = req.body;
-        console.log(cartItems,userId)
         // Calculate total price
         let totalPrice = 0;
         for (const [bookId, quantity] of Object.entries(cartItems)) {
@@ -86,13 +84,14 @@ class bookController{
             }
             totalPrice += book.price * quantity;
         }
+        
         // Create a new shopBook document
         const order = new shopBookModel({
             userId,
             books: Object.keys(cartItems),
             price: totalPrice
         });
-
+        console.log(order);
         // Save the order
         await order.save();
         
@@ -102,6 +101,7 @@ class bookController{
         res.status(500).json({ message: "An error occurred. Please try again later.", success: false });
     }
 };
+
 
 }
 
