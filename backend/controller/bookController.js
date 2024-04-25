@@ -65,7 +65,7 @@ class bookController{
             res.status(500).json({ message: 'Server Error' });
         }
     };
-
+    
     static placeOrder = async (req, res) => {
     try {
         // Check if user is logged in
