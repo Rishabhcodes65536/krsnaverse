@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Events_detailed from './pages/Events_detailed';
 // import './App.css';
 import OrderPage from './pages/OrderPage';
+import My_cart from './pages/My_cart';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route exact path="/travels" element={<Travels/>}/>
         <Route exact path="/shop" element={<Shop/>}/>
         <Route exact path="/order" element={<OrderPage />} />
+        <Route exact path="/mycart" element={<My_cart/>} />
       </Routes>
     </BrowserRouter>
   );

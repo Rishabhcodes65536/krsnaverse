@@ -91,7 +91,7 @@ export default function Music_carousel({ images }) {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`absolute block max-w-full h-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+            className={`absolute block w-[60vw] h-[60vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
               index === activeIndex ? 'opacity-100' : 'opacity-0'
             } transition-opacity duration-700 ease-in-out`}
           >
@@ -100,7 +100,6 @@ export default function Music_carousel({ images }) {
               height="100%"
               src={image} // Assuming 'image' contains the YouTube video URL
               title={`Slide ${index + 1}`}
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>

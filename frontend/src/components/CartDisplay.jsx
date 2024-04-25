@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CartDisplay = ({ cartItems, books, totalAmount, onRemoveFromCart }) => {
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-blue-100 p-4 border-t border-blue-500">
+        <div className=" bottom-0 left-0 right-0 bg-blue-100 p-4 border-t border-blue-500">
             <h1 className="text-2xl font-semibold mb-4">My Cart:</h1>
             {Object.keys(cartItems).map((id) => {
                 const book = books.find((book) => book._id === id);

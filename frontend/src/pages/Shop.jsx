@@ -55,6 +55,9 @@ export default function Shopping() {
     return (
         <>
             <Navbar cartItemsCount={Object.keys(cartItems).length} />
+            <div className='text-4xl mx-[40vw] text-[#5a72a7] flex justify-center my-10 font-bold '>
+              <h2 className="">Books</h2>
+            </div>
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-3 gap-4">
                     {/* Product cards */}
@@ -74,13 +77,6 @@ export default function Shopping() {
                 </div>
                 {/* Cart Display */}
                 <CartDisplay cartItems={cartItems} books={books} totalAmount={totalAmount} onRemoveFromCart={removeFromCart} />
-
-                {/* Proceed to Checkout Button */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                    <Link to="/order" style={{ backgroundColor: '#007bff', color: '#fff', fontWeight: 'bold', padding: '0.5rem 1rem', borderRadius: '0.25rem', textDecoration: 'none', textAlign: 'center' }}>
-                        Proceed to Checkout
-                    </Link>
-                </div>
             </div>
             <Footer />
         </>
