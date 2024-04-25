@@ -1,5 +1,6 @@
 import { mongoose } from 'mongoose';
 import userModel from '../models/user.js';
+import bcrypt from "bcrypt"
 
 class userController{
     static home=async (req,res)=>{
@@ -13,11 +14,12 @@ class userController{
     }
     static createUserDoc = async (req,res)=>{
             console.log(req.body);
+            const hashed_password=await bcrypt.hash(req.body.password,10)
         try {
             const doc=new userModel({
                 name:req.body.name,
                 email:req.body.email,
-                password:req.body.password,
+                password:hashed_password,
                 gender:req.body.gender,
                 age:req.body.age
             })
@@ -35,7 +37,8 @@ class userController{
         const result = await userModel.findOne({ email: req.body.email });
         console.log(result);
         if (result != null) {
-            if (result.password == req.body.password) {
+            await bcrypt.compare(req.body.password,result.password).then((resul)=>{
+            if (resul) {
                 // Send a success response with user validation status
                 console.log("Password matched");
                 req.session.user = result;
@@ -45,6 +48,7 @@ class userController{
                 console.log("Incorrect password");
                 res.status(401).json({ message: "Incorrect password", verified: false });
             }
+        });
         } else {
             // Send a not found response if user doesn't exist
             console.log("User not found");
