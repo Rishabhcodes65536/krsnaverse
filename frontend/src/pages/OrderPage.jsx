@@ -57,7 +57,7 @@ const OrderPage = () => {
             return;
         }
         
-        const response = await axios.post('http://localhost:9999/book', { cartItems }, {
+        const response = await axios.post('http://localhost:9999/cart', { cartItems }, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
