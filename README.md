@@ -7,6 +7,7 @@ Krsnaverse is a web application dedicated to spreading the teachings and conscio
 
 - [About](#about)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Team Members](#team-members)
 - [Usage](#usage)
 
