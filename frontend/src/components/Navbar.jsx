@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaPowerOff, FaRegBell, FaTimes } from "react-icons/fa"; // Import FaTimes for delete icon
+import { FaPowerOff, FaRegBell, FaTimes, FaShoppingCart } from "react-icons/fa"; // Import FaTimes for delete icon
+import { GiShoppingCart } from "react-icons/gi";
+import { FiPower } from "react-icons/fi";
 import Dropdown from './Dropdown';
 
 const notification_data = [
@@ -50,17 +52,16 @@ export default function Navbar() {
   };
 
   const isckon = [
-    { label: 'About Us', link: '/' },
-    { label: 'The History', link: '/' },
-    { label: 'Philosophy', link: '/' },
-    { label: 'Founder', link: '/' },
-    { label: 'Why this krishna consciousness movement', link: '/' },
+    { label: 'About Us', link: '/about' },
+    { label: 'The History', link: '/history' },
+    { label: 'Philosophy', link: '/philosophy' },
+    { label: 'Founder', link: '/founder' },
+    { label: 'Why this krishna consciousness movement', link: '/why' },
   ];
 
   const services = [
     { label: 'Music and Meditate', link: '/music' },
     { label: 'Shop', link: '/shop' },
-    { label: 'Machine Learning', link: '/' },
   ];
 
   const totalNotifications = notifications.length;
@@ -80,6 +81,9 @@ export default function Navbar() {
             </li>
             <li className="font-semibold text-gray-700">
               <a href="/events">Events</a>
+            </li>
+            <li className="font-semibold text-gray-700">
+              <a href="/contact">Contact us</a>
             </li>
             <Dropdown name="Services" items={services} />
             <li>
@@ -107,7 +111,10 @@ export default function Navbar() {
               </div>
             </li>
             <li>
-              <a href="/login"><FaPowerOff className="h-6 w-6" /></a>
+              <a href="/login"><FiPower className="h-6 w-6" /></a>
+            </li>
+            <li>
+              <a href="/cart"><GiShoppingCart className="h-6 w-6" /></a>
             </li>
           </ul>
         </div>
