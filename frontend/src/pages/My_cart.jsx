@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const My_cart = () => {
-    const [orderedBooks, setOrderedBooks] = useState([]); // Renamed to orderedBooks
+    const [orderedBooks, setOrderedBooks] = useState([]); 
     const [totalAmount, setTotalAmount] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -24,8 +24,8 @@ const My_cart = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                // console.log(response);
-                setOrderedBooks(response.data.Orders); // Set orderedBooks
+                setOrderedBooks(response.data.Orders); 
+                console.log(response.data.Orders[0].items);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching ordered books:', error);
@@ -40,7 +40,7 @@ const My_cart = () => {
     useEffect(() => {
         let total = 0;
         orderedBooks.forEach((item) => {
-            total += item.books.price * item.quantity;
+            total += item.price;
         });
         setTotalAmount(total);
     }, [orderedBooks]);
@@ -58,7 +58,7 @@ const My_cart = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setOrderedBooks(orderedBooks.filter((item) => item._id !== itemId)); // Update orderedBooks
+            setOrderedBooks(orderedBooks.filter((item) => item._id !== itemId)); 
         } catch (error) {
             console.error('Error removing item from cart:', error);
         }
@@ -97,22 +97,43 @@ const My_cart = () => {
                     <div className="text-xl font-semibold text-center">Your cart is empty.</div>
                 ) : (
                     <div>
-                        {orderedBooks.map((item) => (
-                            <div key={item._id} className="flex justify-between items-center border-b border-gray-200 py-4">
-                                <div>
-                                    <h2 className="text-xl font-semibold">{item.books.name}</h2>
-                                    <p className="text-gray-600">{item.books.author}</p>
-                                    <p className="text-gray-600">Price: Rs {item.books.price}</p>
-                                    <p className="text-gray-600">Quantity: {item.quantity}</p>
+                        {orderedBooks.map((order) => (
+                             
+                            <div key={order._id} className="border border-gray-200 rounded-lg mb-6 p-4">
+                            <div className="flex justify-between mb-4">
+                             <div>
+                             <h2 className="text-xl font-semibold">Order Status: {order.orderStatus}</h2>
+                             </div>
+                             <div>
+                              <p className="text-gray-600">Order Date: {new Date(order.date).toLocaleDateString()}</p>
+                            </div>
+                            </div>
+                                {order.items.map((item) => (
+                                    <div key={item._id} className="flex justify-between items-center mb-4">
+                                        <div className="flex items-center space-x-4">
+                                            <img src={item.book.image} alt={item.book.name} className="w-16 h-16 object-cover rounded" />
+                                            <div>
+                                                <h2 className="text-xl font-semibold">{item.book.name}</h2>
+                                                <p className="text-gray-600">{item.book.author}</p>
+                                                <p className="text-gray-600">Price: Rs {item.book.price}</p>
+                                                <p className="text-gray-600">Quantity: {item.quantity}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-gray-600">Total: Rs {item.totalPrice}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                <div className="mt-4 flex justify-end">
+                                    <div className="text-xl font-semibold">Order Total: Rs {order.price}</div>
                                 </div>
-                                <button className="text-red-500 font-semibold" onClick={() => handleRemoveItem(item._id)}>Remove</button>
                             </div>
                         ))}
-                        <div className="mt-8 flex justify-center">
-                            <div className="text-xl font-semibold">Total Amount: Rs {totalAmount}</div>
-                        </div>
                     </div>
                 )}
+                <div className="mt-8 flex justify-center">
+                    <Link to="/shop" className="bg-primary px-6 py-3 rounded-lg shadow-md hover:bg-primary-dark transition duration-300">Shop more items</Link>
+                </div>
             </div>
             <Footer />
         </div>
