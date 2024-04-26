@@ -11,6 +11,7 @@ import Events_detailed from './pages/Events_detailed';
 // import './App.css';
 import OrderPage from './pages/OrderPage';
 import My_cart from './pages/My_cart';
+import Donate_view_all from './pages/Donate_view_all';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route exact path="/shop" element={<Shop/>}/>
         <Route exact path="/order" element={<OrderPage />} />
         <Route exact path="/mycart" element={<My_cart/>} />
+        <Route exact path="/donate_view_all" element={<Donate_view_all/>} />
       </Routes>
     </BrowserRouter>
   );

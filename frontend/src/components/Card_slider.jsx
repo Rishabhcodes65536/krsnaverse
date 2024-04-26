@@ -3,34 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const data = [
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-    {
-        description: `Visitor Facility`,
-        img: `/images/c1.jpeg`
-    },
-];
 
-export default function Card_slider() {
+export default function Card_slider({explore_data}) {
    
     var settings = {
         dots: true,
@@ -49,7 +23,7 @@ export default function Card_slider() {
             <div className="w-10/12 m-auto mb-20">
                 <div className="mt-10 ">
                     <Slider {...settings}>
-                        {data.map((d) => (
+                        {explore_data.map((d) => (
                             <div
                                 class="block max-w-[18rem]  rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                                 <div class="relative overflow-hidden bg-cover bg-no-repeat">
@@ -60,7 +34,7 @@ export default function Card_slider() {
                                     />
                                 </div>
                                 <div class="p-6">
-                                    <p class="text-black">
+                                    <p class="text-[#7e8daa] text-lg font-bold">
                                         {d.description}
                                     </p>
                                 </div>

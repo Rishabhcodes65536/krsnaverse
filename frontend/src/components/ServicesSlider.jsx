@@ -57,28 +57,28 @@ export default function ServicesSlider({ service_data }) {
     var settings = {
         dots: true,
         infinite: true,
-        speed: 500,
-        slidesToShow: 3.5,
+        speed: 300,
+        slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        draggable: true,
+        // draggable: true,
         swipeToSlide: true,
     };
 
     return (
-        <div className="w-10/12 m-auto mb-20">
+        <div className="w-full m-auto mb-20">
             <div className="mt-10 ">
                 <Slider {...settings}>
                     {service_data &&
                         service_data.map((d) => (
                             <div
                                 key={d._id}
-                                className="block max-w-[18rem] bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
+                                className="block max-w-[30rem] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
                             >
-                                <div className="border rounded-full overflow-hidden bg-cover bg-no-repeat">
+                                <div className=" flex justify-center  bg-purple-100 items-center border rounded-full overflow-hidden bg-cover bg-no-repeat w-[20vw] h-[30vh]">
                                     {d.image && (
                                         <img
-                                            className="rounded-t-xl w-full h-[25vh]"
+                                            className="rounded-t-xl w-[8vw] h-[15vh]"
                                             src={d.image}
                                             alt=""
                                         />
