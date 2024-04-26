@@ -10,6 +10,6 @@ router.get("/login",userController.login)
 router.post("/login",userController.validateLogin)
 router.get("/register",userController.register)
 router.post("/register",userController.createUserDoc)
-router.get("get-otp",userController.sendOtp)
+
 
 export default router;

@@ -4,6 +4,7 @@ import validationResult from "express-validator";
 import OTP from '../models/otp.js';
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import nodemailer from "nodemailer"
 
 class userController{
     static home=async (req,res)=>{
@@ -67,30 +68,87 @@ class userController{
 };
 
 static sendOtp= async (req,res)=>{
-     try {
-        const errors = validationResult(req);
-if(!errors.isEmpty()){
-return res.status(400).json({
-success: false,
-msg: 'Errors',
-errors: errors.array()
-});
- }
-const { email }= req. body;
+        const email=req.body.email;
+        console.log(email);
+        let digits = '0123456789'; 
+        let otp = ''; 
+        let len = digits.length 
+        for (let i = 0; i < 4; i++) { 
+        otp += digits[Math.floor(Math.random() * len)]; 
+        } 
+        if(!email){
+            res.status(404).json({"message":"Complete email",verified:false});
+        }
+        const user=await userModel.find({email});
+        if(!user){
+            res.status(404).json({"message":"No such user",verified:false});
+        }
 
-const userData = await userModel.findOne({email});
-if(!userData){
-return res.status (400).json({
-success: false,
-msg: "Email doesn't exists!"
-})
-}
-
+        const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.SMTP_EMAIL,
+            pass: process.env.SMTP_APP_PASSWORD
+        }
+    });
+     const emailSubject = `OTP Verification for krsnaverse`;
+     const emailHtmlContent = `
+        <p>Dear ${user.name},</p>
+        <p>Use ${otp} for verification</p>
+    `; 
+    try {
+        const info = await transporter.sendMail({
+            from: {
+                name: `Recruiter krsnaverse`,
+                address: process.env.EMAIL
+            },
+            to: [`${email}`], // list of receivers
+            subject: emailSubject, // Subject line
+            // text: "Hello world?", // plain text body
+            html: emailHtmlContent, // html body
+        });
+        
+        console.log("Message sent: %s", info.messageId);
+        const saltRounds = 10;
+        console.log(otp);
+        const hashedOTP = await bcrypt.hash(otp.toString(), saltRounds);
+        res.status(200).json({
+            message: "Mail sent successfully",
+            info: info,
+            success:true,
+            hashedOTP
+        });
     } catch (error) {
-        console.error('Error sending OTP:', error);
-        res.status(500).json({ success: false, message: 'Error sending OTP' });
+        console.error("Error sending email: ", error);
+        res.status(500).json({
+            message: "Mail sent successfully",
+            info: info,
+            success:false
+        });;
     }
 }
-
+static verifyOtp=async (req,res)=>{
+    const { otp, hashedOTP } = req.body;
+    const otpString = otp.join('');
+    console.log(otp);
+    console.log(hashedOTP);
+     try {
+        // Verify user-entered OTP by hashing and comparing with stored hashed OTP
+        const match = await bcrypt.compare(otpString.toString(), hashedOTP);
+        if (match) {
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
+    } catch (error) {
+        console.error('Error verifying OTP:', error);
+        res.status(500).json({ success: false, error: 'An error occurred. Please try again.' });
+    }
+}
 };
+
+
 export default userController;
