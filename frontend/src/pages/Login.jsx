@@ -116,12 +116,13 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:9999/login', formData);
             const { message, verified } = response.data;
-            localStorage.setItem('token', response.data.token);
             setMessage(message);
             console.log(response.data);
             console.log(message);
             console.log(verified);
             if (verified) {
+                localStorage.setItem('token', response.data.token);
+                console.log(localStorage.getItem('token'));
                 // Set isLoggedIn to true in localStorage upon successful login
                 localStorage.setItem('isLoggedIn', 'true');
                 window.location.href = '/'; // Redirect to home page if login is successful

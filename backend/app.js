@@ -31,7 +31,7 @@ import bookRouter from './routes/bookRoutes.js'
 import musicRouter from './routes/musicRouter.js'
 import adminRoutes from './routes/adminRoutes.js'
 import eventRouter from './routes/eventRoutes.js'
-
+import shopping from './routes/shopBookRoute.js'
 
 // view engine setup
 
@@ -60,6 +60,7 @@ app.use('/book', bookRouter);
 app.use('/event', eventRouter);
 app.use('/music',musicRouter);
 app.use('/admin',adminRoutes);
+app.use('/cart',shopping);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

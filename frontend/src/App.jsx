@@ -26,7 +26,7 @@ export default function App() {
         <Route exact path="/travels" element={<Travels/>}/>
         <Route exact path="/shop" element={<Shop/>}/>
         <Route exact path="/order" element={<OrderPage />} />
-        <Route exact path="/mycart" element={<My_cart/>} />
+        <Route exact path="/cart" element={<My_cart/>} />
         <Route exact path="/donate_view_all" element={<Donate_view_all/>} />
       </Routes>
     </BrowserRouter>
