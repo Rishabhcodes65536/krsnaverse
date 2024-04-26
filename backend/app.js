@@ -7,10 +7,10 @@ import dotenv from "dotenv"
 import cors from "cors"
 import session from "express-session";
 import bodyParser from "body-parser";
-
+import nodemailer from "nodemailer";
 dotenv.config()
 import { join } from "path"
-
+import userController from "./controller/userController.js";
 // import ejs from "ejs"
 
 const app=express()
@@ -61,7 +61,14 @@ app.use('/event', eventRouter);
 app.use('/music',musicRouter);
 app.use('/admin',adminRoutes);
 app.use('/cart',shopping);
+app.use('/send-otp',userController.sendOtp)
+app.use('/verify-otp',userController.verifyOtp)
+
+
+
 // catch 404 and forward to error handler
+
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
