@@ -14,7 +14,9 @@ import userController from "./controller/userController.js";
 // import ejs from "ejs"
 
 const app=express()
-app.use(cors());
+app.use(cors({
+  origin:["http://localhost:3000","https://krsnaverse.onrender.com"]
+}));
 const port=process.env.PORT || '3000'
 const DATABASE_URI=process.env.DATABASE_URI || "mongodb://localhost:27017"
 import connectDB from "./db/connectdb.js";

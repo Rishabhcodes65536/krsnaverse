@@ -79,7 +79,8 @@ static sendOtp= async (req,res)=>{
         if(!email){
             res.status(404).json({"message":"Complete email",verified:false});
         }
-        const user=await userModel.find({email});
+        const user=await userModel.findOne({email});
+        console.log(user)
         if(!user){
             res.status(404).json({"message":"No such user",verified:false});
         }
@@ -96,7 +97,7 @@ static sendOtp= async (req,res)=>{
     });
      const emailSubject = `OTP Verification for krsnaverse`;
      const emailHtmlContent = `
-        <p>Dear ${user.name},</p>
+        <p>Dear user,</p>
         <p>Use ${otp} for verification</p>
     `; 
     try {
@@ -107,7 +108,6 @@ static sendOtp= async (req,res)=>{
             },
             to: [`${email}`], // list of receivers
             subject: emailSubject, // Subject line
-            // text: "Hello world?", // plain text body
             html: emailHtmlContent, // html body
         });
         
@@ -117,7 +117,7 @@ static sendOtp= async (req,res)=>{
         const hashedOTP = await bcrypt.hash(otp.toString(), saltRounds);
         res.status(200).json({
             message: "Mail sent successfully",
-            info: info,
+            // info: info,
             success:true,
             hashedOTP
         });
@@ -125,7 +125,7 @@ static sendOtp= async (req,res)=>{
         console.error("Error sending email: ", error);
         res.status(500).json({
             message: "Mail sent successfully",
-            info: info,
+            // info: info,
             success:false
         });;
     }
