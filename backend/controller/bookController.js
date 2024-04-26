@@ -65,42 +65,51 @@ class bookController{
             res.status(500).json({ message: 'Server Error' });
         }
     };
+// backend/controllers/shopBookController.js
 
 static placeOrder = async (req, res) => {
     try {
         // Check if user is logged in
-        const userId = req.userId // Access userId from middleware
-        console.log(userId);
+        const userId = req.userId; // Access userId from middleware
         if (!userId) {
             return res.status(401).json({ message: "Unauthorized", success: false });
         }
+        
         const { cartItems } = req.body;
-        // Calculate total price
+        
+        // Calculate total price and create order items array
         let totalPrice = 0;
+        const orderItems = [];
+        
         for (const [bookId, quantity] of Object.entries(cartItems)) {
             const book = await bookModel.findById(bookId);
             if (!book) {
                 return res.status(404).json({ message: `Book with id ${bookId} not found`, success: false });
             }
-            totalPrice += book.price * quantity;
+            const itemTotalPrice = book.price * quantity;
+            totalPrice += itemTotalPrice;
+            
+            // Add book details and quantity to order items array
+            orderItems.push({ book: bookId, quantity, totalPrice: itemTotalPrice });
         }
         
         // Create a new shopBook document
-        const order = new shopBookModel({
+        const Order = new shopBookModel({
             userId,
-            books: Object.keys(cartItems),
+            items: orderItems, // Update to include items array
             price: totalPrice
         });
-        console.log(order);
+
         // Save the order
-        await order.save();
+        await Order.save();
         
-        res.status(200).json({ message: "Order placed successfully", order, success: true });
+        res.status(200).json({ message: "Order placed successfully", Order, success: true });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "An error occurred. Please try again later.", success: false });
     }
 };
+
 static getBookOrder = async (req,res)=>{
     try {
         const userId=req.userId;
@@ -108,7 +117,10 @@ static getBookOrder = async (req,res)=>{
              return res.status(401).json({ message: "Unauthorized", success: false });
         }
         console.log(userId);
-        const Orders=await shopBookModel.find({userId}).populate('books');
+        const Orders = await shopBookModel.find({ userId }).populate({
+            path: 'items.book', // Populate nested field within the items array
+            model: 'Book', // Model name
+        });
         console.log(Orders[0].books);
         console.log(Orders);
         if(!Orders){
