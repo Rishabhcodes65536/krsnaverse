@@ -25,6 +25,15 @@ Krsnaverse serves as a digital portal for individuals interested in understandin
 - **Dynamic Frontend**: Engage with a dynamic and interactive user interface that adapts to user preferences and actions.
 - **Payment Gateway**: Securely process online payments for purchases and donations through integrated payment gateways.
 
+## Screenshots
+
+![Screenshot 1](images/home.png)
+![Screenshot 1](images/aboutus.png)
+![Screenshot 1](images/travels.png)
+![Screenshot 1](images/events.png)
+![Screenshot 1](images/book.png)
+![Screenshot 1](images/music.png)
+
 ## Team Members
 
 #### 1. Rishabh Jain
