@@ -1,5 +1,7 @@
 import { mongoose } from 'mongoose';
 import {userModel} from '../models/user.js';
+import validationResult from "express-validator";
+import OTP from '../models/otp.js';
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
@@ -63,6 +65,32 @@ class userController{
         res.status(500).json({ message: "An error occurred. Please try again later.", verified: false });
     }
 };
+
+static sendOtp= async (req,res)=>{
+     try {
+        const errors = validationResult(req);
+if(!errors.isEmpty()){
+return res.status(400).json({
+success: false,
+msg: 'Errors',
+errors: errors.array()
+});
+ }
+const { email }= req. body;
+
+const userData = await userModel.findOne({email});
+if(!userData){
+return res.status (400).json({
+success: false,
+msg: "Email doesn't exists!"
+})
+}
+
+    } catch (error) {
+        console.error('Error sending OTP:', error);
+        res.status(500).json({ success: false, message: 'Error sending OTP' });
+    }
+}
 
 };
 export default userController;

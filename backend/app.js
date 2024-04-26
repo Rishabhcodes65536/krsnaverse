@@ -7,7 +7,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import session from "express-session";
 import bodyParser from "body-parser";
-
+import nodemailer from "nodemailer";
 dotenv.config()
 import { join } from "path"
 
@@ -61,7 +61,13 @@ app.use('/event', eventRouter);
 app.use('/music',musicRouter);
 app.use('/admin',adminRoutes);
 app.use('/cart',shopping);
+
+
+
+
 // catch 404 and forward to error handler
+
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
