@@ -29,10 +29,10 @@ export default function Footer() {
           {/* Contact us section */}
           <div className="p-5">
             <div className="text-sm uppercase text-indigo-600 font-bold">Contact us</div>
-            <p className="my-3 block flex items-center"><MdLocationOn className="mr-2" /> ISKCON Vrindavan, Krishna Balaram Mandir <br /> Bhaktivedanta Swami Marg, Raman Reti, <br /> Vrindavan, Uttar Pradesh-281121, India</p>
-            <p className="my-3 block flex items-center"><MdPhone className="mr-2" /> Contact us: +917618183108</p>
-            <p className="my-3 block flex items-center"><MdEmail className="mr-2" /> Email: info@iskconvrindavan.com</p>
-          </div>
+            <div className="my-3 flex items-center"><MdLocationOn size={20} /> ISKCON Vrindavan, Krishna Balaram Mandir <br /> Bhaktivedanta Swami Marg, Raman Reti, <br /> Vrindavan, Uttar Pradesh-281121, India</div>
+            <div className="my-3 flex items-center"><MdPhone size={20} /> Contact us: +917618183108</div>
+            <div className="my-3 flex items-center"><MdEmail size={20} /> Email: info@iskconvrindavan.com</div>
+        </div>
         </div>
       </div>
       

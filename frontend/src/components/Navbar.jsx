@@ -4,6 +4,7 @@ import { FaPowerOff, FaRegBell, FaTimes, FaShoppingCart } from "react-icons/fa";
 import { GiShoppingCart } from "react-icons/gi";
 import { FiPower } from "react-icons/fi";
 import Dropdown from './Dropdown';
+import axios from 'axios';
 
 const notification_data = [
   {
@@ -60,11 +61,12 @@ export default function Navbar() {
   ];
 
   const services = [
-    { label: 'Music and Meditate', link: '/music' },
+    { label: 'Music', link: '/music' },
     { label: 'Shop', link: '/shop' },
   ];
 
   const totalNotifications = notifications.length;
+
 
   return (
     <Container>

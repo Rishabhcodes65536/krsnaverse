@@ -19,6 +19,7 @@ import Founder from './pages/Founder';
 import Why from './pages/Why';
 import Contact from './pages/Contact';
 import Poster from './pages/Poster';
+import Donate_us from './pages/Donate_us';
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route exact path="/order" element={<OrderPage />} />
         <Route exact path="/cart" element={<My_cart/>} />
         <Route exact path="/poster" element={<Poster/>} />
+        <Route exact path="/donate" element={<Donate_us/>} />
         <Route exact path="/donate_view_all" element={<Donate_view_all/>} />
       </Routes>
     </BrowserRouter>

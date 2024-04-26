@@ -64,7 +64,7 @@ export default function Shopping() {
                     {/* Product cards */}
                     {books.map((book) => (
                         <div key={book._id} style={{ border: '1px solid #000', padding: '1rem', marginBottom: '1rem' }}>
-                            <img src={book.image} alt="" style={{ width: '100%', marginBottom: '0.5rem' }} />
+                            <img className='w-[30vw] h-[70vh]' src={book.image} alt="" style={{ marginBottom: '0.5rem' }} />
                             <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>{book.name}</h2>
                             <p style={{ color: '#666', marginBottom: '0.5rem' }}>Author: {book.author}</p>
                             <p style={{ color: '#666', marginBottom: '0.5rem' }}>Price: {book.price} Rs</p>

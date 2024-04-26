@@ -5,6 +5,7 @@ import Card_slider from '../components/Card_slider'
 import Footer from '../components/Footer'
 import Donate_us from '../components/Donate_us'
 import ServicesSlider from '../components/ServicesSlider'
+
 // import Dropdown from '../components/Dropdown'
 
 const service_data = [
@@ -116,6 +117,8 @@ const donate_data = [
   },
 
 ];
+
+
 
 export default function Home() {
   return (

@@ -92,7 +92,7 @@ const My_cart = () => {
         <div className="flex flex-col min-h-screen">
             <Navbar />
             <div className="container mx-auto px-4 py-8 flex-grow">
-                <h1 className="text-3xl font-semibold text-center mb-8">My Cart</h1>
+                <h1 className="text-3xl text-[#5a72a7] font-bold text-center mb-8">My Cart</h1>
                 {orderedBooks.length === 0 ? (
                     <div className="text-xl font-semibold text-center">Your cart is empty.</div>
                 ) : (
