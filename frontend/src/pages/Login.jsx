@@ -209,6 +209,7 @@ export default function Login() {
         otp: ''
     });
     const [message, setMessage] = useState('');
+    const [hashedOtp, setOtp] = useState('');
     const [showOtpField, setShowOtpField] = useState(false);
 
     const handleChange = (e) => {
@@ -273,13 +274,6 @@ export default function Login() {
                     <form onSubmit={handleSubmit}>
                         <Input_field type="text" name="email" value={formData.email} onChange={handleChange} />
                         <Input_field type="password" name="password" value={formData.password} onChange={handleChange} />
-                        {showOtpField ? (
-                            <div>
-                                <Input_field type="text" name="otp" placeholder="Enter OTP" value={formData.otp} onChange={handleChange} />
-                            </div>
-                        ) : (
-                            <button className="bg-indigo-500 hover:bg-indigo-600 py-2 px-4 rounded-lg text-white" onClick={handleSendOtp}>Send OTP</button>
-                        )}
                         <div className="text-center lg:text-left">
                             <button
                                 type="submit"
