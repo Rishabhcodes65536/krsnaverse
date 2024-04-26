@@ -1,5 +1,7 @@
 import React from 'react';
-import { FiTwitter } from 'react-icons/fi';
+import { FiTwitter, FiInstagram } from 'react-icons/fi'; // Import Twitter and Instagram icons
+import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md'; // Import Email, Phone, and LocationOn icons
+import { FaYoutube, FaFacebook } from 'react-icons/fa'; // Import YouTube and Facebook icons
 
 export default function Footer() {
   return (
@@ -27,8 +29,9 @@ export default function Footer() {
           {/* Contact us section */}
           <div className="p-5">
             <div className="text-sm uppercase text-indigo-600 font-bold">Contact us</div>
-            <a className="my-3 block" href="/#">XXX XXXX, Floor 4 San Francisco, CA <span className="text-teal-600 text-xs p-1"></span></a>
-            <a className="my-3 block" href="/#">contact@company.com <span className="text-teal-600 text-xs p-1"></span></a>
+            <p className="my-3 block flex items-center"><MdLocationOn className="mr-2" /> ISKCON Vrindavan, Krishna Balaram Mandir <br /> Bhaktivedanta Swami Marg, Raman Reti, <br /> Vrindavan, Uttar Pradesh-281121, India</p>
+            <p className="my-3 block flex items-center"><MdPhone className="mr-2" /> Contact us: +917618183108</p>
+            <p className="my-3 block flex items-center"><MdEmail className="mr-2" /> Email: info@iskconvrindavan.com</p>
           </div>
         </div>
       </div>
@@ -36,29 +39,26 @@ export default function Footer() {
       {/* Social media icons section */}
       <div className="bg-gray-100 pt-2">
         <div className="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-sm flex-col max-w-screen-lg items-center">
-          <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+          <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex gap-4">
             <a href="/#" className="w-6 mx-1">
-                <FiTwitter className="fill-current cursor-pointer hover:color" color="#1DA1F2" size={32} />
+              <FiTwitter className="fill-current cursor-pointer hover:color" color="#1DA1F2" size={32} />
             </a>
             <a href="/#" className="w-6 mx-1">
-              <svg className="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                {/* Facebook icon path */}
-              </svg>
+              <FiInstagram className="fill-current cursor-pointer hover:color" color="#C13584" size={32} />
             </a>
             <a href="/#" className="w-6 mx-1">
-              <svg className="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                {/* LinkedIn icon path */}
-              </svg>
+              <FaFacebook className="fill-current cursor-pointer text-blue-600 hover:text-blue-800" size={32} />
             </a>
             <a href="/#" className="w-6 mx-1">
-              <svg className="fill-current cursor-pointer text-gray-500 hover:text-indigo-600" width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                {/* Instagram icon path */}
-              </svg>
+              <FaYoutube className="fill-current cursor-pointer text-red-600 hover:text-red-800" size={32} />
+            </a>
+            <a href="/#" className="w-6 mx-1">
+              <MdEmail className="fill-current cursor-pointer text-red-600 hover:text-red-800" size={32} />
             </a>
           </div>
           <div className="my-5">© Copyright 2020. All Rights Reserved.</div>
         </div>
       </div>
     </div>
-  )
+  );
 }

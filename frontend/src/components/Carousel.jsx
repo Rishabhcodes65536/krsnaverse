@@ -30,23 +30,23 @@ export default function Carousel() {
         <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
           {/* <!-- Item 1 --> */}
           <div className={`${currentItem === 0 ? 'block' : 'hidden'} duration-200 ease-linear`} data-carousel-item>
-            <img src="images\c1.jpeg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+            <img src="images\b1.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
           </div>
           {/* <!-- Item 2 --> */}
           <div className={`${currentItem === 1 ? 'block' : 'hidden'} duration-200 ease-linear`} data-carousel-item>
-            <img src="images\c2.jpeg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+            <img src="images\b2.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
           </div>
           {/* <!-- Item 3 --> */}
           <div className={`${currentItem === 2 ? 'block' : 'hidden'} duration-200 ease-linear`} data-carousel-item="active">
-            <img src="images\c3.jpeg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+            <img src="images\b3.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
           </div>
           {/* <!-- Item 4 --> */}
           <div className={`${currentItem === 3 ? 'block' : 'hidden'} duration-200 ease-linear`} data-carousel-item>
-            <img src="images\c4.jpeg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+            <img src="images\b4.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
           </div>
           {/* <!-- Item 5 --> */}
           <div className={`${currentItem === 4 ? 'block' : 'hidden'} duration-200 ease-linear`} data-carousel-item>
-            <img src="images\c5.jpeg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+            <img src="images\b5.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
           </div>
         </div>
         {/* <!-- Slider controls --> */}
