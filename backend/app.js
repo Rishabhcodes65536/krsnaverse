@@ -21,6 +21,8 @@ app.use(
       "https://krsnaverse.onrender.com",
       "https://krsnaverse-n8y8sxuxy-rishabhcodes65536s-projects.vercel.app",
       "https://krsnaverse.vercel.app",
+      "https://krsnaverse.vercel-api.app",
+
     ],
   })
 );
