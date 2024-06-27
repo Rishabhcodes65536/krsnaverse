@@ -105,7 +105,7 @@ export default function Events_detailed() {
             try {
                 // const response = await axios.get(`http://localhost:9999/event/${id}`);
                 const response = await axios.get(
-                  `https://krsnaverse-api.vercel.app//event/${id}`
+                  `https://krsnaverse-api.vercel.app/event/${id}`
                 );
                 setEvent(response.data);
                 setLoading(false);
