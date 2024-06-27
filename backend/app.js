@@ -14,9 +14,16 @@ import userController from "./controller/userController.js";
 // import ejs from "ejs"
 
 const app=express()
-app.use(cors({
-  origin:["http://localhost:3000","https://krsnaverse.onrender.com"]
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://krsnaverse.onrender.com",
+      "krsnaverse-n8y8sxuxy-rishabhcodes65536s-projects.vercel.app",
+      "krsnaverse.vercel.app",
+    ],
+  })
+);
 const port=process.env.PORT || '3000'
 const DATABASE_URI=process.env.DATABASE_URI || "mongodb://localhost:27017"
 import connectDB from "./db/connectdb.js";
