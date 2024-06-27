@@ -19,8 +19,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://krsnaverse.onrender.com",
-      "krsnaverse-n8y8sxuxy-rishabhcodes65536s-projects.vercel.app",
-      "krsnaverse.vercel.app",
+      "https://krsnaverse-n8y8sxuxy-rishabhcodes65536s-projects.vercel.app",
+      "https://krsnaverse.vercel.app",
     ],
   })
 );
