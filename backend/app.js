@@ -17,12 +17,11 @@ const app=express()
 app.use(
   cors({
     origin: [
+      "https://krsnaverse.vercel.app",
       "http://localhost:3000",
       "https://krsnaverse.onrender.com",
-      "https://krsnaverse-n8y8sxuxy-rishabhcodes65536s-projects.vercel.app",
-      "https://krsnaverse.vercel.app",
       "https://krsnaverse.vercel-api.app",
-
+      "https://krsnaverse-git-main-rishabhcodes65536s-projects.vercel.app/",
     ],
   })
 );
