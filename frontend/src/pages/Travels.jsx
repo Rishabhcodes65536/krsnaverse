@@ -39,7 +39,10 @@ export default function Travels() {
   useEffect(() => {
     const fetchTravels = async () => {
       try {
-        const response = await axios.get('http://localhost:9999/travel');
+        // const response = await axios.get('http://localhost:9999/travel');
+        const response = await axios.get(
+          "https://krsnaverse-api.vercel.app/travel"
+        );
         setTravels(response.data);
       } catch (error) {
         console.error('Error fetching travel data:', error);

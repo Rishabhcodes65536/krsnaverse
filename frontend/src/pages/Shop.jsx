@@ -15,13 +15,21 @@ export default function Shopping() {
     // Fetch books from backend API on component mount
     useEffect(() => {
     
-        axios.get('http://localhost:9999/book')
-            .then(response => {
-                setBooks(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching books:', error);
-            });
+        // axios.get('http://localhost:9999/book')
+        //     .then(response => {
+        //         setBooks(response.data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching books:', error);
+        //     });
+        axios
+          .get("https://krsnaverse-api.vercel.app/book")
+          .then((response) => {
+            setBooks(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching books:", error);
+          });
     }, []);
 
     // Update local storage when cart items change

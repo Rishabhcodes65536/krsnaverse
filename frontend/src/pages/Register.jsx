@@ -36,7 +36,11 @@ export default function Register() {
             try {
                 setLoading(true);
                 // Send OTP request to the server
-                const response = await axios.post('http://localhost:9999/send-otp', { email: formData.email });
+                // const response = await axios.post('http://localhost:9999/send-otp', { email: formData.email });
+                const response = await axios.post(
+                  "https://krsnaverse-api.vercel.app/send-otp",
+                  { email: formData.email }
+                );
                 console.log('OTP Sent:', response.data);
                 setOtpPhase(true);
                 // setOtp(response.data.OTP); // Set OTP received from the server
@@ -51,13 +55,21 @@ export default function Register() {
             try {
                 setLoading(true);
                 // Verify OTP with the server
-                const response = await axios.post('http://localhost:9999/verify-otp', { otp, hashedOTP });
+                // const response = await axios.post('http://localhost:9999/verify-otp', { otp, hashedOTP });
+                const response = await axios.post(
+                  "https://krsnaverse-api.vercel.app/verify-otp",
+                  { otp, hashedOTP }
+                );
                 console.log('OTP Verified:', response.data);
                 console.log(response.data.success);
                 if (response.data.success) {
                     // Save user data after OTP verification
                     const userData = { ...formData, otp };
-                    const saveResponse = await axios.post('http://localhost:9999/register', userData);
+                    // const saveResponse = await axios.post('http://localhost:9999/register', userData);
+                    const saveResponse = await axios.post(
+                      "https://krsnaverse-api.vercel.app/register",
+                      userData
+                    );
                     console.log('User Registered:', saveResponse.data);
                     // Redirect to login page after successful registration
                     window.location.href = '/login';

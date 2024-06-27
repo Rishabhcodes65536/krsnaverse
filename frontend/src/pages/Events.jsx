@@ -35,7 +35,10 @@ export default function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:9999/event');
+        // const response = await axios.get('http://localhost:9999/event');
+        const response = await axios.get(
+          "https://krsnaverse-api.vercel.app/event"
+        );
         // response.data.date=response.data.date.toString();
         setEvents(response.data);
       } catch (error) {

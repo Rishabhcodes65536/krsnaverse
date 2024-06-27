@@ -19,11 +19,19 @@ const My_cart = () => {
                     return;
                 }
 
-                const response = await axios.get('http://localhost:9999/cart', {
+                // const response = await axios.get('http://localhost:9999/cart', {
+                //     headers: {
+                //         Authorization: `Bearer ${token}`,
+                //     },
+                // });
+                const response = await axios.get(
+                  "https://krsnaverse-api.vercel.app/cart",
+                  {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                      Authorization: `Bearer ${token}`,
                     },
-                });
+                  }
+                );
                 setOrderedBooks(response.data.Orders); 
                 console.log(response.data.Orders[0].items);
                 setLoading(false);

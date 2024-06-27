@@ -219,7 +219,11 @@ export default function Login() {
     const handleSendOtp = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:9999/send-otp', { email: formData.email });
+            // const response = await axios.post('http://localhost:9999/send-otp', { email: formData.email });
+            const response = await axios.post(
+              "https://krsnaverse-api.vercel.app/send-otp",
+              { email: formData.email }
+            );
             if (response.data.success) {
                 setMessage(`OTP sent to ${formData.email}`);
                 setShowOtpField(true);
@@ -235,7 +239,11 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:9999/login', formData);
+            // const response = await axios.post('http://localhost:9999/login', formData);
+            const response = await axios.post(
+              "https://krsnaverse-api.vercel.app/login",
+              formData
+            );
             const { message, verified } = response.data;
             setMessage(message);
             console.log(response.data);

@@ -84,7 +84,10 @@ export default function MusicApp() {
   useEffect(() => {
     const fetchMusicData = async () => {
       try {
-        const response = await axios.get('http://localhost:9999/music');
+        // const response = await axios.get('http://localhost:9999/music');
+        const response = await axios.get(
+          "https://krsnaverse-api.vercel.app/music"
+        );
         console.log(response.data);
         setMusics(response.data);
       } catch (error) {

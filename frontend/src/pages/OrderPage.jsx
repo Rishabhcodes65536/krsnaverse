@@ -33,16 +33,27 @@ const OrderPage = () => {
 
     useEffect(() => {
         // Fetch products from the API
-        axios.get('http://localhost:9999/book')
-            .then(response => {
-                setProducts(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-                setError('Error fetching products. Please try again later.');
-                setLoading(false);
-            });
+        // axios.get('http://localhost:9999/book')
+        //     .then(response => {
+        //         setProducts(response.data);
+        //         setLoading(false);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching products:', error);
+        //         setError('Error fetching products. Please try again later.');
+        //         setLoading(false);
+        //     });
+        axios
+          .get("https://krsnaverse-api.vercel.app/book")
+          .then((response) => {
+            setProducts(response.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching products:", error);
+            setError("Error fetching products. Please try again later.");
+            setLoading(false);
+          });
     }, []);
 
     const handleSubmit = async () => {
